@@ -24,13 +24,13 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String prefix = ResourceOps.resourceUnsafe(fileName);
-        System.out.println(prefix);
+//        System.out.println(prefix);
 
         String fileInfo = request.getPathInfo();
-        System.out.println(fileInfo);
+//        System.out.println(fileInfo);
 
         String fullName = prefix + fileInfo;
-        System.out.println(fullName);
+//        System.out.println(fullName);
 
         if(!new File(fullName).exists()) {
             response.setStatus(404);
@@ -43,13 +43,14 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String choiceOfUser = req.getParameter("Yes/No");
+        String choiceOfUser1 = req.getParameter("Like");
+        String choiceOfUser2 = req.getParameter("Dislike");
 
-        if (choiceOfUser != null && choiceOfUser.equals("yes") || choiceOfUser.equals("no")){
-            if (choiceOfUser.equals("yes")){
-                System.out.printf("User chose %s", choiceOfUser);
-            } else if (choiceOfUser.equals("no")){
-                System.out.printf("User chose %s", choiceOfUser);
+        if ((choiceOfUser1 != null && choiceOfUser1.equals("Like")) || (choiceOfUser2 != null && choiceOfUser2.equals("Dislike"))) {
+            if (choiceOfUser1 != null && choiceOfUser1.equals("Like")) {
+                System.out.println("User chose Like");
+            } else if (choiceOfUser2 != null && choiceOfUser2.equals("Dislike")) {
+                System.out.println("User chose Dislike");
             } else {
                 System.out.println("Something unexpected");
             }
@@ -57,4 +58,5 @@ public class UsersServlet extends HttpServlet {
 
         resp.sendRedirect("/users/like-page.html");
     }
+
 }
