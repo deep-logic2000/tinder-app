@@ -26,7 +26,6 @@ public class App {
         handler.addServlet(new ServletHolder(cssServlet), "/css/*");
         handler.addServlet(new ServletHolder(likedServlet), "/liked/*");
 
-        handler.addServlet(TestServlet.class,"/users");
         handler.addServlet(new ServletHolder(usersServlet), "/users/*");
 
         server.setHandler(handler);

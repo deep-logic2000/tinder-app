@@ -28,6 +28,7 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <form method="post">
+                        <input type="hidden" name="choice" value="Like">
                         <button type="submit" name="Like" value="Like" class="btn btn-outline-success btn-block">
                             <span class="fa fa-heart"></span> Like
                         </button>
@@ -35,6 +36,7 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <form method="post">
+                        <input type="hidden" name="choice" value="Dislike">
                         <button type="submit" name="Dislike" value="Dislike" class="btn btn-outline-danger btn-block">
                             <span class="fa fa-times"></span> Dislike
                         </button>
