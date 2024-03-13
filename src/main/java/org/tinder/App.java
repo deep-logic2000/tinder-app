@@ -26,9 +26,10 @@ public class App {
 
         FreemarkerService freemarker = new FreemarkerService("templates");
 
-
         HttpServlet likedServlet = new LikedServlet("templates", freemarker);
-        handler.addServlet(new ServletHolder(new CssServlet("templates/css")), "/css/*");
+        HttpServlet cssServlet = new CssServlet("templates/css");
+
+        handler.addServlet(new ServletHolder(cssServlet), "/css/*");
         handler.addServlet(new ServletHolder(likedServlet), "/liked/*");
 
         handler.addServlet(TestServlet.class,"/users");

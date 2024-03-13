@@ -3,4 +3,3 @@ g	java:S112"FDefine and throw a dedicated exception instead of using a generi
 ƒ
 java:S1319"aThe type of "data" should be an interface such as "Map" rather than the implementation "HashMap".(‡ıí·ùÿÿÿÿ8ûÎ¶ã1
 G	java:S106"+Replace this use of System.out by a logger.(‹Ğšœ8¨Ï¶ã1
-L	java:S106!"+Replace this use of System.out by a logger.(Šìİ¥úÿÿÿÿ8´Ï¶ã1
