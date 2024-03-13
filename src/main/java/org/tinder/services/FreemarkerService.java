@@ -30,11 +30,6 @@ public class FreemarkerService {
   }
 
   public String getPath(String name) throws URISyntaxException {
-    System.out.println("path" + FreemarkerService.class
-            .getClassLoader()
-            .getResource(name)
-            .toURI()
-            .getPath());
     return FreemarkerService.class
             .getClassLoader()
             .getResource(name)
