@@ -1,24 +1,29 @@
 package org.tinder;
 
-import java.io.Serializable;
-import java.util.Objects;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.util.Date;
 
-public class User implements Serializable {
-    private long id;
+public class User {
+    private int id;
     private String name;
     private String surname;
     private String img;
     private String login;
     private String password;
+    private String profession;
+    private Date lastDateLogin;
+    private String lastDateLoginString;
 
-    public User(long id, String name, String surname, String img, String login, String password) {
+    public User(int id, String name, String surname, String img, String login, String password, String profession, Date dateLogin) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.img = img;
         this.login = login;
         this.password = password;
+        this.profession = profession;
+        this.lastDateLogin = dateLogin;
+        this.lastDateLoginString = getLastDateLoginString();
     }
 
     @Override
@@ -33,24 +38,7 @@ public class User implements Serializable {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(img, user.img) && Objects.equals(login, user.login) && Objects.equals(password, user.password);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, surname, img, login, password);
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -74,6 +62,10 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
@@ -92,5 +84,29 @@ public class User implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public Date getLastDateLogin() {
+        return lastDateLogin;
+    }
+
+    public void setLastDateLogin(Date lastDateLogin) {
+        this.lastDateLogin = lastDateLogin;
+    }
+
+    public String getLastDateLoginString() {
+        int day = lastDateLogin.getDay();
+        int month = lastDateLogin.getMonth() + 1;
+        int year = lastDateLogin.getYear();
+        String dateToShow = String.format("%02d/%02d/%d", day, month, year);
+        return dateToShow;
     }
 }

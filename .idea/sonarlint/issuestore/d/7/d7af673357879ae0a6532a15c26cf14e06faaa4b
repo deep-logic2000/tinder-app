@@ -1,0 +1,14 @@
+
+~
+java:S1488m"bImmediately return this expression instead of assigning it to the temporary variable "dateToShow".(í›³Z8–ïšÂã1
+]	java:S107"AConstructor has 8 parameters, which is greater than 7 authorized.(êèï´8®ïšÂã1
+P
+java:S1874j".Remove this use of "getDay"; it is deprecated.(Â¿…ãøÿÿÿÿ8ÀïšÂã1
+M
+java:S1874k"0Remove this use of "getMonth"; it is deprecated.(ÊÉş£8ÁïšÂã1
+L
+java:S1874l"/Remove this use of "getYear"; it is deprecated.(ÉèÈ8ÂïšÂã1
+R
+java:S1128"0Remove this unused import 'java.time.LocalDate'.(›‘¬èıÿÿÿÿ8ÄïšÂã1
+T
+java:S1068"7Remove this unused "lastDateLoginString" private field.(»ĞÊû8ÄïšÂã1

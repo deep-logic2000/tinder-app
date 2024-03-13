@@ -1,0 +1,11 @@
+
+r
+java:S1989""PHandle the following exception that could be thrown by "getWriter": IOException.(ÃúŒĞùÿÿÿÿ8“îÃã1
+P
+java:S1128"3Remove this unused import 'org.tinder.ResourceOps'.(°õæÀ8ª‘§Ãã1
+R
+java:S1128"0Remove this unused import 'java.time.LocalDate'.(›‘¬èıÿÿÿÿ8«‘§Ãã1
+Z
+java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8«‘§Ãã1
+J
+java:S1068"(Remove this unused "root" private field.(ˆÌııÿÿÿÿ8—îÃã1
