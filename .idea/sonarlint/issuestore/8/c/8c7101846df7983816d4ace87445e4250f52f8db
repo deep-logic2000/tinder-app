@@ -1,0 +1,31 @@
+
+Q
+java:S3740"/Provide the parametrized type for this generic.(®ò¾Œøÿÿÿÿ8²Ø‡¹ã1
+c
+java:S1192:"HDefine a constant instead of duplicating this literal "Dislike" 3 times.(±Íà“þÿÿÿÿ
+‡
+java:S1319"eThe type of "users" should be an interface such as "List" rather than the implementation "ArrayList".(®ò¾Œøÿÿÿÿ8ºØ‡¹ã1
+s
+java:S1104"QMake users a static final constant or non-public and provide accessors if needed.(®ò¾Œøÿÿÿÿ8¼Ø‡¹ã1
+M
+java:S1444"+Make this "public static users" field final(®ò¾Œøÿÿÿÿ8 û¢Ãã1
+?
+java:S2386"Make this member "protected".(®ò¾Œøÿÿÿÿ8Îû¢Ãã1
+H
+java:S1874",Remove this use of "Date"; it is deprecated.(¥Š™o8£Ù‡¹ã1
+N
+java:S1874",Remove this use of "Date"; it is deprecated.(°¤ýÏùÿÿÿÿ8¥Ù‡¹ã1
+H
+java:S1874",Remove this use of "Date"; it is deprecated.(¤Ç¯8¦Ù‡¹ã1
+]	java:S125&"<This block of commented-out lines of code should be removed.(ÒØ´Ãýÿÿÿÿ8½§ŒÃã1
+]	java:S125)"<This block of commented-out lines of code should be removed.(äö¼Ïýÿÿÿÿ8¾§ŒÃã1
+X	java:S125,"<This block of commented-out lines of code should be removed.(òÅ‰8¾§ŒÃã1
+x
+java:S19890"VHandle the following exception that could be thrown by "getOutputStream": IOException.(Œ¶Ëúÿÿÿÿ8Ã§ŒÃã1
+h
+java:S19892"KHandle the following exception that could be thrown by "copy": IOException.(»õÈæ8Ä§ŒÃã1
+E	java:S106>"+Replace this use of System.out by a logger.(š§íªþÿÿÿÿ
+@	java:S106@"+Replace this use of System.out by a logger.(Î¾µº
+?	java:S106B"+Replace this use of System.out by a logger.(Üéà 
+i
+java:S1989F"SHandle the following exception that could be thrown by "sendRedirect": IOException.(°ÔÜÝ

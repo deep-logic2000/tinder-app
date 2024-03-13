@@ -1,5 +1,8 @@
 package org.tinder;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class User {
     private int id;
     private String name;
@@ -7,14 +10,20 @@ public class User {
     private String img;
     private String login;
     private String password;
+    private String profession;
+    private Date lastDateLogin;
+    private String lastDateLoginString;
 
-    public User(int id, String name, String surname, String img, String login, String password) {
+    public User(int id, String name, String surname, String img, String login, String password, String profession, Date dateLogin) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.img = img;
         this.login = login;
         this.password = password;
+        this.profession = profession;
+        this.lastDateLogin = dateLogin;
+        this.lastDateLoginString = getLastDateLoginString();
     }
 
     @Override
@@ -75,5 +84,29 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public Date getLastDateLogin() {
+        return lastDateLogin;
+    }
+
+    public void setLastDateLogin(Date lastDateLogin) {
+        this.lastDateLogin = lastDateLogin;
+    }
+
+    public String getLastDateLoginString() {
+        int day = lastDateLogin.getDay();
+        int month = lastDateLogin.getMonth() + 1;
+        int year = lastDateLogin.getYear();
+        String dateToShow = String.format("%02d/%02d/%d", day, month, year);
+        return dateToShow;
     }
 }
