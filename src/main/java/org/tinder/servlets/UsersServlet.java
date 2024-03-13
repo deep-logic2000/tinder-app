@@ -17,6 +17,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Date;
+
 public class UsersServlet extends HttpServlet {
     private final String fileName;
     public static ArrayList<User> users = new ArrayList<>();
@@ -25,6 +31,8 @@ public class UsersServlet extends HttpServlet {
     private ArrayList<String> firstNames = new ArrayList<>();
     private ArrayList<String> lastNames = new ArrayList<>();
     private int currentIndex = 0;
+
+    public static ArrayList users = new ArrayList<User>();
 
     public UsersServlet(String fileName) {
         this.fileName = fileName;
@@ -35,6 +43,7 @@ public class UsersServlet extends HttpServlet {
         users.add(user1);
         users.add(user2);
         users.add(user3);
+
 
         images.add("https://images.pexels.com/photos/18083418/pexels-photo-18083418.jpeg?auto=compress&cs=tinysrgb&w=600");
         images.add("https://images.pexels.com/photos/16162647/pexels-photo-16162647.jpeg?auto=compress&cs=tinysrgb&w=600");
