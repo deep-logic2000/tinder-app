@@ -1,11 +1,8 @@
 package org.tinder;
-
-import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
-public class User implements Serializable {
+public class User {
     private int id;
     private String name;
     private String surname;
@@ -87,6 +84,7 @@ public class User implements Serializable {
     public String getPassword() {
         return password;
     }
+
 
     public String getProfession() {
         return profession;
