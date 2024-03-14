@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public class Auth {
-    public static String cookieName = "CALC";
+    public static String cookieName = "TINDER";
 
     private static final Cookie[] empty = new Cookie[]{};
 

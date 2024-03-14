@@ -21,6 +21,13 @@ body {
 .form-signin .checkbox {
   font-weight: 400;
 }
+
+.error-massage{
+  text-align: center;
+  color:red;
+  margin: 0 auto;
+}
+
 .form-signin .form-control {
   position: relative;
   box-sizing: border-box;

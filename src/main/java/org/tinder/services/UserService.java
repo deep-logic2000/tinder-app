@@ -12,18 +12,16 @@ public class UserService implements Serializable {
     private CollectionUserDAO usersDataBase = new CollectionUserDAO();
 
 
-    public User getUserFromId(long id) {
+    public Optional<User> getUserFromId(long id) {
         return usersDataBase.getUserById(id);
 
     }
 
-    public User getUserByLoginAndPassword(String login, String password) {
+    public Optional<User> getUserByLoginAndPassword(String login, String password) {
         return usersDataBase.getUserByLoginAndPassword(login, password);
     }
 
-    public void createUser() {
-        usersDataBase.createUser();
-    }
+
 
 
     public boolean saveUser(User user) {

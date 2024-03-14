@@ -20,16 +20,7 @@ public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String message = Auth.getCookieValue(req)
-                .map(id -> String.format("User  %s was logged out", id))
-                .orElse("Nobody was logged in");
-
-        HashMap<String, Object> data = new HashMap<>();
-        data.put("message", message);
-
-        try (PrintWriter w = resp.getWriter()) {
-            Auth.clearCookie(resp);
-            freemarker.render("calc-logout.ftl", data, w);
-        }
+        Auth.clearCookie(resp);
+        resp.sendRedirect("/login");
     }
 }
