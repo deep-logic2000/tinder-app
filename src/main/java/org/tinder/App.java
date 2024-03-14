@@ -6,15 +6,10 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.tinder.services.FreemarkerService;
 import org.tinder.servlets.*;
 import javax.servlet.http.HttpServlet;
-import java.util.ArrayList;
-import java.util.HashMap;
-import org.tinder.filter.HttpFilter;
-import org.tinder.services.FreemarkerService;
 import org.tinder.servlets.LoginServlet;
-import org.tinder.servlets.TestServlet;
 import org.tinder.servlets.UsersServlet;
 
-import javax.servlet.http.HttpServlet;
+
 
 
 public class App {
