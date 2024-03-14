@@ -1,14 +1,17 @@
 package org.tinder;
 
+import java.util.Objects;
+import java.util.UUID;
+
 public class User {
-    private int id;
+    private long id;
     private String name;
     private String surname;
     private String img;
     private String login;
     private String password;
 
-    public User(int id, String name, String surname, String img, String login, String password) {
+    public User(long id, String name, String surname, String img, String login, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -29,7 +32,24 @@ public class User {
                 '}';
     }
 
-    public void setId(int id) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(img, user.img) && Objects.equals(login, user.login) && Objects.equals(password, user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, img, login, password);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -51,10 +71,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getName() {
