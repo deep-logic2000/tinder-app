@@ -5,7 +5,7 @@ import org.tinder.User;
 import java.io.*;
 import java.util.*;
 
-public class CollectionUserDAO implements UserDAO {
+public class CollectionUserDAO implements UserDAO, Serializable {
 
     private List<User> databaseOfUsers = new ArrayList<>();
 

@@ -3,11 +3,12 @@ package org.tinder.controllers;
 import org.tinder.User;
 import org.tinder.services.UserService;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
 
-public class UserController {
+public class UserController implements Serializable {
 
     private UserService userService;
 

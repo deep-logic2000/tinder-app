@@ -1,9 +1,10 @@
 package org.tinder;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class User {
+public class User implements Serializable {
     private long id;
     private String name;
     private String surname;

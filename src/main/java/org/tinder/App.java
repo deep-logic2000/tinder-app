@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Server server = new Server(8080);
+        Server server = new Server(8081);
 
         ServletContextHandler handler = new ServletContextHandler();
         FreemarkerService freemarker = new FreemarkerService("templates");

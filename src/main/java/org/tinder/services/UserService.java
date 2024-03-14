@@ -3,11 +3,12 @@ package org.tinder.services;
 import org.tinder.User;
 import org.tinder.dao.CollectionUserDAO;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
 
-public class UserService {
+public class UserService implements Serializable {
     private CollectionUserDAO usersDataBase = new CollectionUserDAO();
 
 
