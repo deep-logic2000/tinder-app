@@ -32,7 +32,6 @@ public class UsersServlet extends HttpServlet {
     private ArrayList<String> lastNames = new ArrayList<>();
     private int currentIndex = 0;
 
-    public static ArrayList users = new ArrayList<User>();
 
     public UsersServlet(String fileName) {
         this.fileName = fileName;

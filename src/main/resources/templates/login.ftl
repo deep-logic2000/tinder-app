@@ -14,16 +14,19 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="css/style.css">
-</head>
 
+
+
+</head>
 <body class="text-center">
-<form class="form-signin">
+<form method="post" class="form-signin">
     <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <p class="error-massage">${errorMassage}</p>
     <label for="inputLogin" class="sr-only">Login</label>
-    <input type="text" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
+    <input type="text" name="login" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-muted">&copy; Tinder 2018</p>
 </form>
