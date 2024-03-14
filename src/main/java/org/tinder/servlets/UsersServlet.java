@@ -1,15 +1,22 @@
 package org.tinder.servlets;
 
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import org.tinder.ResourceOps;
 import org.tinder.User;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,8 +24,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class UsersServlet extends HttpServlet {
-
     private final String fileName;
+    public static ArrayList<User> users = new ArrayList<>();
+
+    private ArrayList<String> images = new ArrayList<>();
+    private ArrayList<String> firstNames = new ArrayList<>();
+    private ArrayList<String> lastNames = new ArrayList<>();
+    private int currentIndex = 0;
+
     public static ArrayList users = new ArrayList<User>();
 
     public UsersServlet(String fileName) {
@@ -30,44 +43,60 @@ public class UsersServlet extends HttpServlet {
         users.add(user1);
         users.add(user2);
         users.add(user3);
+
+
+        images.add("https://images.pexels.com/photos/18083418/pexels-photo-18083418.jpeg?auto=compress&cs=tinysrgb&w=600");
+        images.add("https://images.pexels.com/photos/16162647/pexels-photo-16162647.jpeg?auto=compress&cs=tinysrgb&w=600");
+        images.add("https://images.pexels.com/photos/775358/pexels-photo-775358.jpeg?auto=compress&cs=tinysrgb&w=600");
+
+        // Додайте інші імена та прізвища, якщо потрібно
+        firstNames.add("Olena");
+        firstNames.add("Iruna");
+        firstNames.add("Ostap");
+
+        lastNames.add("Melnyk");
+        lastNames.add("Kozak");
+        lastNames.add("Luba");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String prefix = ResourceOps.resourceUnsafe(fileName);
-//        System.out.println(prefix);
+        Configuration cfg = new Configuration(Configuration.VERSION_2_3_32);
+        cfg.setDirectoryForTemplateLoading(new File(
+                ResourceOps.resourceUnsafe("templates")
+        ));
 
-        String fileInfo = request.getPathInfo();
-//        System.out.println(fileInfo);
+        String currentImage = images.get(currentIndex);
+        String currentFirstName = firstNames.get(currentIndex);
+        String currentLastName = lastNames.get(currentIndex);
 
-        String fullName = prefix + fileInfo;
-//        System.out.println(fullName);
+        HashMap<String, String> data = new HashMap<>();
+        data.put("name", currentFirstName);
+        data.put("surname", currentLastName);
+        data.put("image", currentImage);
 
-        if(!new File(fullName).exists()) {
-            response.setStatus(404);
-        } else try (ServletOutputStream os = response.getOutputStream()) {
-            Path path = Paths.get(fullName);
-            Files.copy(path, os);
+        try (PrintWriter pw = response.getWriter()) {
+            Template template = cfg.getTemplate("like-page.ftl");
+            template.process(data, pw);
+        } catch (TemplateException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String choiceOfUser = req.getParameter("choice");
 
-        String choiceOfUser1 = req.getParameter("Like");
-        String choiceOfUser2 = req.getParameter("Dislike");
-
-        if ((choiceOfUser1 != null && choiceOfUser1.equals("Like")) || (choiceOfUser2 != null && choiceOfUser2.equals("Dislike"))) {
-            if (choiceOfUser1 != null && choiceOfUser1.equals("Like")) {
-                System.out.println("User chose Like");
-            } else if (choiceOfUser2 != null && choiceOfUser2.equals("Dislike")) {
-                System.out.println("User chose Dislike");
-            } else {
-                System.out.println("Something unexpected");
+        if (choiceOfUser != null) {
+            if (choiceOfUser.equals("Like")) {
+                currentIndex = (currentIndex + 1) % images.size(); // Збільшуємо індекс зображення на 1, обмежуємо його до розміру списку
+            } else if (choiceOfUser.equals("Dislike")) {
+                currentIndex = (currentIndex + 1) % images.size();
             }
         }
 
-        resp.sendRedirect("/users/like-page.html");
+        resp.sendRedirect("/users");
     }
-
 }
+
+
