@@ -2,12 +2,12 @@ package org.tinder.dao;
 
 import org.tinder.User;
 
+import java.util.Optional;
 
 
 public interface UserDAO {
-User getUserById(long id);
-User getUserByLoginAndPassword(String login, String password);
-void createUser();
+    Optional<User> getUserById(long id);
+    Optional<User> getUserByLoginAndPassword(String login, String password);
 boolean saveUser(User user);
 
 
