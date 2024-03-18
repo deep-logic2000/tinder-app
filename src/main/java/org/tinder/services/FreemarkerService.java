@@ -14,7 +14,6 @@ public class FreemarkerService {
   private final Configuration cfg = new Configuration(Configuration.VERSION_2_3_32);
 
   public FreemarkerService(String root) throws IOException, URISyntaxException {
-    System.out.println(getPath(root));
     cfg.setDirectoryForTemplateLoading(
       new File(getPath(root))
     );

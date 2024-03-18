@@ -15,7 +15,6 @@ public class LikedService {
     }
 
     public List<User> getAllLikedUsers(){
-        System.out.println("getAllLikedUsers triggered");
         return ld.getAllLikedUsers();
     }
 

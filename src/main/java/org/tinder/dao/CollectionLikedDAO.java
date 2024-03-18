@@ -1,9 +1,7 @@
 package org.tinder.dao;
 
-import org.tinder.Auth;
 import org.tinder.User;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,12 +11,12 @@ import java.util.List;
 
 public class CollectionLikedDAO {
 
-    private static int currentUserId = 4;
+    private static int currentUserId = 4; // Should be Auth.getCookieValue(HttpServletRequest rq)
     private static final String GET_ALL_LIKED_USERS_QUERY = """
         SELECT id_from, id_to, status, name, surname, img, last_login_date_time, profession, id
         FROM liked
         JOIN users
-        on liked.id_from = users.id
+        on liked.id_to = users.id
         where liked.id_from = """ + currentUserId;
     private final Connection conn;
     List<User> likedUsers = new ArrayList<>();
@@ -28,7 +26,7 @@ public class CollectionLikedDAO {
     }
 
     public List<User> getAllLikedUsers() {
-//        List<User> likedUsers = new ArrayList<>();
+        likedUsers = new ArrayList<>();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
@@ -39,15 +37,6 @@ public class CollectionLikedDAO {
 
             // Processing the result set and populating the list of users
             while (resultSet.next()) {
-                System.out.println("========================================");
-                System.out.println(resultSet.getInt("id_to"));
-                System.out.println(resultSet.getString("name"));
-                System.out.println(resultSet.getString("surname"));
-                System.out.println(resultSet.getString("img"));
-                System.out.println(resultSet.getString("profession"));
-                System.out.println(resultSet.getTimestamp("last_login_date_time"));
-
-
                 User user = new User(
                         resultSet.getInt("id_to"),
                         resultSet.getString("name"),
