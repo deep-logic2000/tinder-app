@@ -16,11 +16,15 @@ public class UserController implements Serializable {
         this.userService = userService;
     }
 
+
+    public List<User> getUserByLoginAndPassword1(String login, String password) {
+        return userService.getUserByLoginAndPassword1(login, password);
+    }
+
     public Optional<User> getUserFromId(long id) {
         return userService.getUserFromId(id);
 
     }
-
     public Optional<User> getUserByLoginAndPassword(String login, String password) {
         return userService.getUserByLoginAndPassword(login, password);
     }
