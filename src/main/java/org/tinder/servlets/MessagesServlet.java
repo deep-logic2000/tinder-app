@@ -1,6 +1,5 @@
 package org.tinder.servlets;
 
-import org.tinder.ResourceOps;
 import org.tinder.User;
 import org.tinder.services.FreemarkerService;
 
@@ -10,16 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-public class LikedServlet extends HttpServlet {
+public class MessagesServlet extends HttpServlet {
 
     private final String root;
     private final FreemarkerService freemarker;
 
-    public LikedServlet(String fileName, FreemarkerService freemarker) {
+    public MessagesServlet(String fileName, FreemarkerService freemarker) {
         this.root = fileName;
         this.freemarker = freemarker;
     }

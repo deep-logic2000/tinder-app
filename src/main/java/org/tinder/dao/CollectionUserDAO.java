@@ -40,6 +40,7 @@ public class CollectionUserDAO implements UserDAO, Serializable {
     }
 
     public void loadData(List<User> users) {
+        System.out.println(users.toString());
         databaseOfUsers = users;
     }
 

@@ -1,2 +1,7 @@
-package org.tinder.dao;public interface LikedDAO {
+package org.tinder.dao;
+
+public interface LikedDAO {
+
+    void getAllLikedUsers();
+
 }

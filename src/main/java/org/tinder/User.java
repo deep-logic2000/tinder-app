@@ -25,6 +25,16 @@ public class User {
         this.lastDateLoginString = getLastDateLoginString();
     }
 
+    public User(int id, String name, String surname, String img, String profession, Date dateLogin) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.img = img;
+        this.profession = profession;
+        this.lastDateLogin = dateLogin;
+        this.lastDateLoginString = getLastDateLoginString();
+    }
+
     @Override
     public String toString() {
         return "User{" +
