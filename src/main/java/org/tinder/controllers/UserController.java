@@ -17,16 +17,16 @@ public class UserController implements Serializable {
     }
 
 
-    public List<User> getUserByLoginAndPassword1(String login, String password) {
-        return userService.getUserByLoginAndPassword1(login, password);
+    public List<User> getUserByLoginAndPasswordByDB(String login, String password) {
+        return userService.getUserByLoginAndPasswordByDB(login, password);
     }
 
     public Optional<User> getUserFromId(long id) {
         return userService.getUserFromId(id);
 
     }
-    public Optional<User> getUserByLoginAndPassword(String login, String password) {
-        return userService.getUserByLoginAndPassword(login, password);
+    public Optional<User> getUserByLoginAndPasswordByDAO(String login, String password) {
+        return userService.getUserByLoginAndPasswordByDAO(login, password);
     }
 
 
@@ -35,15 +35,4 @@ public class UserController implements Serializable {
         return userService.saveUser(user);
     }
 
-    public void loadData(List<User> users) {
-        userService.loadData(users);
-    }
-
-    public void writingDataToAFile(List<User> users, String fileName) {
-        userService.writingDataToAFile(users, fileName);
-    }
-
-    public void loadingDataFromAFile(String fileName) {
-        userService.loadingDataFromAFile(fileName);
-    }
 }
