@@ -3,7 +3,6 @@ package org.tinder;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.tinder.controllers.LikeDislikeUserController;
 import org.tinder.controllers.UserController;
 import org.tinder.dao.CollectionLikeDislikeUserDAO;
 import org.tinder.dao.CollectionUserDAO;
@@ -38,11 +37,10 @@ public class App {
 
         CollectionLikeDislikeUserDAO collectionLikeDislikeUserDAO = new CollectionLikeDislikeUserDAO(conn);
         LikeDislikeUserService likeDislikeUserService = new LikeDislikeUserService(collectionLikeDislikeUserDAO);
-        LikeDislikeUserController likeDislikeUserController = new LikeDislikeUserController(likeDislikeUserService);
 
 
         ServletContextHandler handler = new ServletContextHandler();
-        UsersServlet usersServlet = new UsersServlet("templates", likeDislikeUserController);
+        UsersServlet usersServlet = new UsersServlet("templates", likeDislikeUserService);
 
         FreemarkerService freemarker = new FreemarkerService("templates");
 
