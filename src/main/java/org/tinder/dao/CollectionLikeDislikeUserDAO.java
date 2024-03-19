@@ -36,7 +36,7 @@ public class CollectionLikeDislikeUserDAO implements LikeDislikeUserDAO {
 
     @Override
     public void getInfoAboutUserToLikeDislike(HttpServletRequest req, HttpServletResponse resp){
-        try (Connection conn = Database.mkConn()) {
+        try {
             String select = GET_ALL_INFO_USERS_TO_LIKE_DISLIKE;
             PreparedStatement st = conn.prepareStatement(select);
             ResultSet rs = st.executeQuery();
@@ -125,8 +125,8 @@ public class CollectionLikeDislikeUserDAO implements LikeDislikeUserDAO {
     }
 
     public void saveLikeIntoDB(int userId, int likedUserId, boolean status) {
-        try (Connection conn = Database.mkConn();
-             PreparedStatement st = conn.prepareStatement(INSERT_CHOICE_OF_USER)) {
+        try {
+            PreparedStatement st = conn.prepareStatement(INSERT_CHOICE_OF_USER);
             st.setInt(1, userId);
             st.setInt(2, likedUserId);
             st.setBoolean(3, status);
