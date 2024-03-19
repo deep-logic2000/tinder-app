@@ -17,7 +17,7 @@ public class UserService implements Serializable {
 
 
     public List<User> getUserByLoginAndPassword1(String login, String password) {
-       return usersDataBase.getUserByLoginAndPassword1(login, password);
+        return usersDataBase.getUserByLoginAndPassword1(login, password);
     }
 
     public Optional<User> getUserFromId(long id) {
