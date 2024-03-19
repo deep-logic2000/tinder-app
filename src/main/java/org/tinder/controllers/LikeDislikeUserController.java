@@ -13,8 +13,8 @@ public class LikeDislikeUserController {
         this.likeDislikeUserService = likeDislikeUserService;
     }
 
-    public void getSomething(HttpServletRequest req, HttpServletResponse resp){
-        likeDislikeUserService.getSomething(req, resp);
+    public void getInfoAboutUserToLikeDislike(HttpServletRequest req, HttpServletResponse resp){
+        likeDislikeUserService.getInfoAboutUserToLikeDislike(req, resp);
     }
 
     public void nextUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {

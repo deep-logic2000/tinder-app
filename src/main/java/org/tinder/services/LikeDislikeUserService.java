@@ -13,7 +13,7 @@ public class LikeDislikeUserService {
         this.likeDislikeUserDAO = likeDislikeUserDAO;
     }
 
-    public void getSomething(HttpServletRequest req, HttpServletResponse resp){
+    public void getInfoAboutUserToLikeDislike(HttpServletRequest req, HttpServletResponse resp){
         likeDislikeUserDAO.getInfoAboutUserToLikeDislike(req, resp);
     }
 

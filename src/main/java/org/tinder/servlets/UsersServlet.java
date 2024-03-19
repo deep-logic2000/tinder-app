@@ -1,5 +1,6 @@
 package org.tinder.servlets;
 
+import org.tinder.Auth;
 import org.tinder.User;
 import org.tinder.controllers.LikeDislikeUserController;
 
@@ -32,7 +33,7 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        likeDislikeUserController.getSomething(request, response);
+        likeDislikeUserController.getInfoAboutUserToLikeDislike(request, response);
 
         likeDislikeUserController.nextUser(request, response);
     }
