@@ -8,7 +8,9 @@
     <link rel="icon" href="img/favicon.ico">
 
     <title>Like page</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+          crossorigin="anonymous">
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -29,6 +31,7 @@
                 <div class="col-12 col-lg-6">
                     <form method="post">
                         <input type="hidden" name="choice" value="Like">
+<#--                        <input type="hidden" name="likedUserId" value="${userId}">-->
                         <button type="submit" name="Like" value="Like" class="btn btn-outline-success btn-block">
                             <span class="fa fa-heart"></span> Like
                         </button>
@@ -37,7 +40,9 @@
                 <div class="col-12 col-lg-6">
                     <form method="post">
                         <input type="hidden" name="choice" value="Dislike">
-                        <button type="submit" name="Dislike" value="Dislike" class="btn btn-outline-danger btn-block">
+<#--                        <input type="hidden" name="likedUserId" value="${userId}">-->
+                        <button type="submit" name="Dislike" value="Dislike"
+                                class="btn btn-outline-danger btn-block">
                             <span class="fa fa-times"></span> Dislike
                         </button>
                     </form>
