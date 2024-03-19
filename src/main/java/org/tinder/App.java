@@ -3,9 +3,12 @@ package org.tinder;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.tinder.controllers.LikeDislikeUserController;
 import org.tinder.controllers.UserController;
+import org.tinder.dao.CollectionLikeDislikeUserDAO;
 import org.tinder.dao.CollectionUserDAO;
 import org.tinder.services.FreemarkerService;
+import org.tinder.services.LikeDislikeUserService;
 import org.tinder.services.UserService;
 import org.tinder.servlets.*;
 import javax.servlet.http.HttpServlet;
@@ -33,9 +36,13 @@ public class App {
         UserService userService = new UserService(collectionUserDAO);
         UserController userController = new UserController(userService);
 
+        CollectionLikeDislikeUserDAO collectionLikeDislikeUserDAO = new CollectionLikeDislikeUserDAO(conn);
+        LikeDislikeUserService likeDislikeUserService = new LikeDislikeUserService(collectionLikeDislikeUserDAO);
+        LikeDislikeUserController likeDislikeUserController = new LikeDislikeUserController(likeDislikeUserService);
+
 
         ServletContextHandler handler = new ServletContextHandler();
-        UsersServlet usersServlet = new UsersServlet("templates");
+        UsersServlet usersServlet = new UsersServlet("templates", likeDislikeUserController);
 
         FreemarkerService freemarker = new FreemarkerService("templates");
 
