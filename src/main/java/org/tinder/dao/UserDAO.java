@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface UserDAO {
     Optional<User> getUserById(long id);
-    Optional<User> getUserByLoginAndPassword(String login, String password);
+    Optional<User> getUserByLoginAndPasswordByDAO(String login, String password);
 boolean saveUser(User user);
 
 

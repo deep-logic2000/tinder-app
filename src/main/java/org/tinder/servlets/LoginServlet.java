@@ -4,14 +4,12 @@ import org.tinder.Auth;
 import org.tinder.User;
 import org.tinder.controllers.UserController;
 import org.tinder.services.FreemarkerService;
-import org.tinder.services.UserService;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -35,6 +33,7 @@ public class LoginServlet extends HttpServlet {
         try (PrintWriter w = resp.getWriter()) {
             freemarker.render("login.ftl", usersForRender, w);
         }
+        isLoginValid = true;
     }
 
     @Override
@@ -43,9 +42,9 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        userController.getUserByLoginAndPassword1(login, password);
+        userController.getUserByLoginAndPasswordByDB(login, password);
 
-        Optional<User> user = userController.getUserByLoginAndPassword(login, password);
+        Optional<User> user = userController.getUserByLoginAndPasswordByDAO(login, password);
 
         if (user.isEmpty()) {
             isLoginValid = false;
