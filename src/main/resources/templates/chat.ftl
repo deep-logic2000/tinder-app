@@ -41,6 +41,7 @@
                         <i class="fa fa-user-plus"></i>
                     </div>
                     <div class="col-md-6 options-right text-right pr-2">
+                        <button class="btn-logout" onclick="window.location='/logout'">Logout</button>
                         <i class="fa fa-cog"></i>
                     </div>
                 </div>
