@@ -26,7 +26,7 @@ public class LikedServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> usersFromDb = ls.getAllLikedUsers();
+        List<User> usersFromDb = ls.getAllLikedUsers(req);
 
         HashMap<String, Object> usersForRender = new HashMap<>();
         usersForRender.put("users", usersFromDb);

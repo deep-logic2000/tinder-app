@@ -11,9 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CollectionMessageDAO {
-    private static int currentUserId = 2; // Should be Auth.getCookieValue(HttpServletRequest rq)
+    private static Optional<String> currentUserIdOpt;
     private static final String GET_ALL_USERS_MESSAGES_QUERY = """
             SELECT sender_id, receiver_id, message, time, u.name, u.surname, u.img, u.id
                        FROM messages m
@@ -34,6 +35,7 @@ public class CollectionMessageDAO {
 
         PreparedStatement statement = null;
         ResultSet resultSet = null;
+        int currentUserId = currentUserIdOpt.map(Integer::parseInt).orElse(0);
 
         Integer chatUserId = Integer.valueOf(getChatUserId(req));
 
