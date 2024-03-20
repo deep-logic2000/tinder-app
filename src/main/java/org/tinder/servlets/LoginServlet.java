@@ -18,11 +18,12 @@ import java.util.Optional;
 
 public class LoginServlet extends HttpServlet {
     private final FreemarkerService freemarker;
-
     private boolean isLoginValid = true;
+    private final UserController userController;
 
-    public LoginServlet(FreemarkerService freemarker) {
+    public LoginServlet(FreemarkerService freemarker, UserController userController) {
         this.freemarker = freemarker;
+        this.userController = userController;
     }
 
     @Override
@@ -38,16 +39,11 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        UserService userService = new UserService();
-        UserController userController = new UserController(userService);
 
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        ArrayList<User> users = getUsers();
-
-        userController.loadData(users);
-
+        userController.getUserByLoginAndPassword1(login, password);
 
         Optional<User> user = userController.getUserByLoginAndPassword(login, password);
 
@@ -61,11 +57,6 @@ public class LoginServlet extends HttpServlet {
             resp.sendRedirect("/users");
 
         }
-
-    }
-
-    private static ArrayList<User> getUsers() {
-        return UsersServlet.users;
 
     }
 }

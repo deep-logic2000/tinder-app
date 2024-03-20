@@ -9,20 +9,24 @@ import java.util.Optional;
 
 
 public class UserService implements Serializable {
-    private CollectionUserDAO usersDataBase = new CollectionUserDAO();
+    private CollectionUserDAO usersDataBase;
 
+    public UserService(CollectionUserDAO usersDataBase) {
+        this.usersDataBase = usersDataBase;
+    }
+
+
+    public List<User> getUserByLoginAndPassword1(String login, String password) {
+        return usersDataBase.getUserByLoginAndPassword1(login, password);
+    }
 
     public Optional<User> getUserFromId(long id) {
         return usersDataBase.getUserById(id);
-
     }
 
     public Optional<User> getUserByLoginAndPassword(String login, String password) {
         return usersDataBase.getUserByLoginAndPassword(login, password);
     }
-
-
-
 
     public boolean saveUser(User user) {
 
