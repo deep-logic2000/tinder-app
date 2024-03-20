@@ -4,6 +4,7 @@ import org.tinder.Message;
 import org.tinder.User;
 import org.tinder.dao.CollectionMessageDAO;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class MessageService {
@@ -14,7 +15,13 @@ public class MessageService {
         this.md = md;
     }
 
-    public List<Message> getAllUsersMessages(){
-        return md.getAllUsersMessages();
+    public List<Message> getAllUsersMessages(HttpServletRequest req){
+        return md.getAllUsersMessages(req);
     }
+
+    public User getChatUser(HttpServletRequest req){
+        return md.getChatUser(req);
+    }
+
+
 }

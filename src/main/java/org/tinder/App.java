@@ -4,9 +4,11 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.tinder.dao.CollectionLikedDAO;
+import org.tinder.dao.CollectionMessageDAO;
 import org.tinder.dao.LikedDAO;
 import org.tinder.services.FreemarkerService;
 import org.tinder.services.LikedService;
+import org.tinder.services.MessageService;
 import org.tinder.servlets.*;
 import javax.servlet.http.HttpServlet;
 import org.tinder.servlets.LoginServlet;
@@ -31,8 +33,10 @@ public class App {
         }
 
         CollectionLikedDAO likedDAO = new CollectionLikedDAO(conn);
+        CollectionMessageDAO messagesDAO = new CollectionMessageDAO(conn);
 
         LikedService ls = new LikedService(likedDAO);
+        MessageService ms = new MessageService(messagesDAO);
 
         ServletContextHandler handler = new ServletContextHandler();
         UsersServlet usersServlet = new UsersServlet(DIR_TEMPLATES_NAME);
@@ -42,7 +46,7 @@ public class App {
         LoginServlet loginServlet = new LoginServlet(freemarker);
 
         HttpServlet likedServlet = new LikedServlet(DIR_TEMPLATES_NAME, freemarker, ls);
-        HttpServlet messagesServlet = new MessagesServlet(DIR_TEMPLATES_NAME, freemarker);
+        HttpServlet messagesServlet = new MessagesServlet(DIR_TEMPLATES_NAME, freemarker, ms);
         HttpServlet cssServlet = new CssServlet("templates/css");
 
         handler.addServlet(new ServletHolder(cssServlet), "/css/*");
