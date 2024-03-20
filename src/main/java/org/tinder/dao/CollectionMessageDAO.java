@@ -1,5 +1,6 @@
 package org.tinder.dao;
 
+import org.tinder.Auth;
 import org.tinder.Message;
 import org.tinder.User;
 
@@ -35,6 +36,7 @@ public class CollectionMessageDAO {
 
         PreparedStatement statement = null;
         ResultSet resultSet = null;
+        currentUserIdOpt = Auth.getCookieValue(req);
         int currentUserId = currentUserIdOpt.map(Integer::parseInt).orElse(0);
 
         Integer chatUserId = Integer.valueOf(getChatUserId(req));
