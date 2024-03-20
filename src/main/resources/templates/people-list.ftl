@@ -10,10 +10,10 @@
     <title>People list</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
@@ -29,10 +29,10 @@
                         <table class="table-users table" border="0">
                             <tbody>
                             <#list users as user>
-                            <tr>
+                            <tr onclick="window.location='/messages/${user.id}';">
                                 <td width="10">
                                     <div class="avatar-img">
-                                        <img class="img-circle" src="${user.img}" />
+                                        <img class="img-circle" src="${user.img}" alt="${user.name} ${user.surname}"/>
                                     </div>
 
                                 </td>
@@ -47,57 +47,6 @@
                                 </td>
                             </tr>
                             </#list>
-<!--                            <tr>-->
-<!--                                <td width="10">-->
-<!--                                    <div class="avatar-img">-->
-<!--                                        <img class="img-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxhcCYW4QDWMOjOuUTxOd50KcJvK-rop9qE9zRltSbVS_bO-cfWA" />  -->
-<!--                                    </div>-->
-
-<!--                                </td>-->
-<!--                                <td class="align-middle">-->
-<!--                                    Herbert Hoover-->
-<!--                                </td>-->
-<!--                                <td class="align-middle">-->
-<!--                                    Builder Sales Agent-->
-<!--                                </td>-->
-<!--                                <td  class="align-middle">-->
-<!--                                    Last Login:  6/10/2017<br><small class="text-muted">5 days ago</small>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td width="10">-->
-<!--                                    <div class="avatar-img">-->
-<!--                                        <img class="img-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxhcCYW4QDWMOjOuUTxOd50KcJvK-rop9qE9zRltSbVS_bO-cfWA" />  -->
-<!--                                    </div>-->
-
-<!--                                </td>-->
-<!--                                <td class="align-middle">-->
-<!--                                    Herbert Hoover-->
-<!--                                </td>-->
-<!--                                <td class="align-middle">-->
-<!--                                    Builder Sales Agent-->
-<!--                                </td>-->
-<!--                                <td  class="align-middle">-->
-<!--                                    Last Login:  6/10/2017<br><small class="text-muted">5 days ago</small>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td width="10">-->
-<!--                                    <div class="avatar-img">-->
-<!--                                        <img class="img-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxhcCYW4QDWMOjOuUTxOd50KcJvK-rop9qE9zRltSbVS_bO-cfWA" />  -->
-<!--                                    </div>-->
-
-<!--                                </td>-->
-<!--                                <td class="align-middle">-->
-<!--                                    Herbert Hoover-->
-<!--                                </td>-->
-<!--                                <td class="align-middle">-->
-<!--                                    Builder Sales Agent-->
-<!--                                </td>-->
-<!--                                <td  class="align-middle">-->
-<!--                                    Last Login:  6/10/2017<br><small class="text-muted">5 days ago</small>-->
-<!--                                </td>-->
-<!--                            </tr>-->
                             </tbody>
                         </table>
                     </div>
