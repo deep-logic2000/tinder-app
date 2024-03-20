@@ -4,25 +4,24 @@ import org.tinder.Auth;
 import org.tinder.User;
 import org.tinder.controllers.UserController;
 import org.tinder.services.FreemarkerService;
-import org.tinder.services.UserService;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
 
 public class LoginServlet extends HttpServlet {
     private final FreemarkerService freemarker;
-
     private boolean isLoginValid = true;
+    private final UserController userController;
 
-    public LoginServlet(FreemarkerService freemarker) {
+    public LoginServlet(FreemarkerService freemarker, UserController userController) {
         this.freemarker = freemarker;
+        this.userController = userController;
     }
 
     @Override
@@ -34,22 +33,18 @@ public class LoginServlet extends HttpServlet {
         try (PrintWriter w = resp.getWriter()) {
             freemarker.render("login.ftl", usersForRender, w);
         }
+        isLoginValid = true;
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        UserService userService = new UserService();
-        UserController userController = new UserController(userService);
 
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        ArrayList<User> users = getUsers();
+        userController.getUserByLoginAndPasswordByDB(login, password);
 
-        userController.loadData(users);
-
-
-        Optional<User> user = userController.getUserByLoginAndPassword(login, password);
+        Optional<User> user = userController.getUserByLoginAndPasswordByDAO(login, password);
 
         if (user.isEmpty()) {
             isLoginValid = false;
@@ -61,11 +56,6 @@ public class LoginServlet extends HttpServlet {
             resp.sendRedirect("/users");
 
         }
-
-    }
-
-    private static ArrayList<User> getUsers() {
-        return UsersServlet.users;
 
     }
 }

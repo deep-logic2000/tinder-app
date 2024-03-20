@@ -9,35 +9,28 @@ import java.util.Optional;
 
 
 public class UserService implements Serializable {
-    private CollectionUserDAO usersDataBase = new CollectionUserDAO();
+    private CollectionUserDAO usersDataBase;
 
+    public UserService(CollectionUserDAO usersDataBase) {
+        this.usersDataBase = usersDataBase;
+    }
+
+
+    public List<User> getUserByLoginAndPasswordByDB(String login, String password) {
+       return usersDataBase.getUserByLoginAndPasswordByDB(login, password);
+    }
 
     public Optional<User> getUserFromId(long id) {
         return usersDataBase.getUserById(id);
-
     }
 
-    public Optional<User> getUserByLoginAndPassword(String login, String password) {
-        return usersDataBase.getUserByLoginAndPassword(login, password);
+    public Optional<User> getUserByLoginAndPasswordByDAO(String login, String password) {
+        return usersDataBase.getUserByLoginAndPasswordByDAO(login, password);
     }
-
-
-
 
     public boolean saveUser(User user) {
 
         return usersDataBase.saveUser(user);
     }
 
-    public void loadData(List<User> users) {
-        usersDataBase.loadData(users);
-    }
-
-    public void writingDataToAFile(List<User> users, String fileName) {
-        usersDataBase.writingDataToAFile(users, fileName);
-    }
-
-    public void loadingDataFromAFile(String fileName) {
-        usersDataBase.loadingDataFromAFile(fileName);
-    }
 }
