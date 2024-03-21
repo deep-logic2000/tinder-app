@@ -1,6 +1,7 @@
 package org.tinder;
 
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
@@ -9,6 +10,7 @@ import org.tinder.dao.CollectionLikeDislikeUserDAO;
 import org.tinder.dao.CollectionUserDAO;
 import org.tinder.dao.CollectionLikedDAO;
 import org.tinder.dao.CollectionMessageDAO;
+import org.tinder.filter.HttpFilter;
 import org.tinder.services.FreemarkerService;
 import org.tinder.services.LikeDislikeUserService;
 import org.tinder.services.UserService;
@@ -17,16 +19,20 @@ import org.tinder.services.MessageService;
 import org.tinder.services.FreemarkerService;
 
 import org.tinder.servlets.*;
+
+import javax.servlet.DispatcherType;
 import javax.servlet.http.HttpServlet;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.EnumSet;
 
 public class App {
     private static final String DIR_TEMPLATES_NAME = "templates";
     public static void main(String[] args) throws Exception {
         Server server = new Server(8080);
         Connection conn = null;
+        var sfd = EnumSet.of(DispatcherType.REQUEST);
 
         try {
             conn = Database.mkConn();
@@ -54,16 +60,25 @@ public class App {
         FreemarkerService freemarker = new FreemarkerService(DIR_TEMPLATES_NAME);
 
         LoginServlet loginServlet = new LoginServlet(freemarker, userController);
+        LogoutServlet logoutServlet = new LogoutServlet(freemarker);
+        HttpFilter httpFilter = new HttpFilter();
 
         HttpServlet likedServlet = new LikedServlet(DIR_TEMPLATES_NAME, freemarker, ls);
         HttpServlet messagesServlet = new MessagesServlet(DIR_TEMPLATES_NAME, freemarker, ms);
         HttpServlet cssServlet = new CssServlet("templates/css");
+
+
+        handler.addFilter(new FilterHolder(httpFilter), "/liked/*", sfd);
+        handler.addFilter(new FilterHolder(httpFilter), "/messages/*", sfd);
+        handler.addFilter(new FilterHolder(httpFilter), "/users/*", sfd);
+
 
         handler.addServlet(new ServletHolder(cssServlet), "/css/*");
         handler.addServlet(new ServletHolder(likedServlet), "/liked/*");
         handler.addServlet(new ServletHolder(messagesServlet), "/messages/*");
         handler.addServlet(new ServletHolder(usersServlet), "/users/*");
         handler.addServlet(new ServletHolder(loginServlet), "/login/*");
+        handler.addServlet(new ServletHolder(logoutServlet), "/logout/*");
 
         server.setHandler(handler);
         server.start();
