@@ -5,11 +5,12 @@ import org.tinder.Message;
 import org.tinder.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.nio.file.Path;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +33,7 @@ public class CollectionMessageDAO {
     }
 
     public List<Message> getAllUsersMessages(HttpServletRequest req) {
-        messages.clear();
+        messages = new ArrayList<>();
 
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -85,9 +86,13 @@ public class CollectionMessageDAO {
     }
 
     public User getChatUser(HttpServletRequest req){
-        Integer chatUserId = Integer.valueOf(getChatUserId(req));
         PreparedStatement statement = null;
         ResultSet resultSet = null;
+
+        currentUserIdOpt = Auth.getCookieValue(req);
+        int currentUserId = currentUserIdOpt.map(Integer::parseInt).orElse(0);
+
+        Integer chatUserId = Integer.valueOf(getChatUserId(req));
 
         try {
             statement = conn.prepareStatement(
@@ -129,5 +134,46 @@ public class CollectionMessageDAO {
         }
         return path;
     };
+
+    public boolean sendMessage(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        currentUserIdOpt = Auth.getCookieValue(req);
+        int currentUserId = currentUserIdOpt.map(Integer::parseInt).orElse(0);
+
+        Integer chatUserId = Integer.valueOf(getChatUserId(req));
+
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        String enteredMessage = req.getParameter("messageText");
+
+        Timestamp ts = Timestamp.from(Instant.now());
+
+        try {
+            statement = conn.prepareStatement(
+                    """
+                            INSERT INTO messages (sender_id, receiver_id, message, time) VALUES(?,?,?,?)
+                        """
+            );
+            statement.setInt(1, currentUserId);
+            statement.setInt(2, chatUserId);
+            statement.setString(3, enteredMessage);
+            statement.setTimestamp(4, ts);
+
+            resultSet = statement.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Closing resources in finally block to ensure they are released properly
+            try {
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    return true;
+
+    }
 
 }

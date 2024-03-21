@@ -43,4 +43,19 @@ public class MessagesServlet extends HttpServlet {
             freemarker.render("chat.ftl", messagesForRender, w);
         }
     }
+
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Boolean rs = ms.sendMessage(req, resp);
+        String path = req.getPathInfo();
+        if (path.startsWith("/")) {
+            path = path.substring(1);
+        }
+        if(rs) {
+            resp.sendRedirect("/messages/" + path);
+        } else {
+            resp.sendRedirect("/liked");
+        }
+    }
 }

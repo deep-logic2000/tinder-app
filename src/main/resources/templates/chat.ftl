@@ -78,12 +78,15 @@
                         <div class="col-md-2 options-left">
                             <i class="fa fa-smile-o"></i>
                         </div>
+                        <form method="post">
                         <div class="col-md-7 pl-0">
-                            <input type="text" class="border-0" placeholder=" Send message" />
+                            <input type="text" class="border-0" placeholder=" Send message" name="messageText"/>
                         </div>
                         <div class="col-md-3 text-right options-right">
                             <i class="fa fa-picture-o mr-2"></i>
                         </div>
+                            <input type="submit" hidden />
+                        </form>
                     </div>
                 </div>
             </div>
