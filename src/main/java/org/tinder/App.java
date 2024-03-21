@@ -66,6 +66,7 @@ public class App {
         HttpServlet likedServlet = new LikedServlet(DIR_TEMPLATES_NAME, freemarker, ls);
         HttpServlet messagesServlet = new MessagesServlet(DIR_TEMPLATES_NAME, freemarker, ms);
         HttpServlet cssServlet = new CssServlet("templates/css");
+        HttpServlet imgServlet = new ImgServlet("templates/img");
 
 
         handler.addFilter(new FilterHolder(httpFilter), "/liked/*", sfd);
@@ -74,6 +75,7 @@ public class App {
 
 
         handler.addServlet(new ServletHolder(cssServlet), "/css/*");
+        handler.addServlet(new ServletHolder(imgServlet), "/img/*");
         handler.addServlet(new ServletHolder(likedServlet), "/liked/*");
         handler.addServlet(new ServletHolder(messagesServlet), "/messages/*");
         handler.addServlet(new ServletHolder(usersServlet), "/users/*");
