@@ -23,6 +23,8 @@ import java.util.Optional;
 public class CollectionLikeDislikeUserDAO implements LikeDislikeUserDAO {
     private static final String GET_ALL_INFO_USERS_TO_LIKE_DISLIKE = "SELECT img, name, surname, id FROM users";
     private static final String INSERT_CHOICE_OF_USER = "INSERT INTO liked (id_from, id_to, status) VALUES(?,?,?)";
+    private static final String UPDATE_CHOICE_OF_USER = "UPDATE liked SET status = ? WHERE id_from = ? AND id_to = ?";
+    private static final String CHECK_USER_RECORDS = "SELECT COUNT(*) FROM liked WHERE id_from = ? AND id_to = ?";
     private final Connection conn;
     private final ArrayList<String> images = new ArrayList<>();
     private final ArrayList<String> firstNames = new ArrayList<>();
@@ -126,14 +128,29 @@ public class CollectionLikeDislikeUserDAO implements LikeDislikeUserDAO {
 
     public void saveLikeIntoDB(int userId, int likedUserId, boolean status) {
         try {
-            PreparedStatement st = conn.prepareStatement(INSERT_CHOICE_OF_USER);
-            st.setInt(1, userId);
-            st.setInt(2, likedUserId);
-            st.setBoolean(3, status);
+            PreparedStatement checkStatement = conn.prepareStatement(CHECK_USER_RECORDS);
+            checkStatement.setInt(1, userId);
+            checkStatement.setInt(2, likedUserId);
+            ResultSet rs = checkStatement.executeQuery();
 
-            st.executeUpdate();
+            rs.next();
+            int count = rs.getInt(1);
+            if (count > 0) {
+                PreparedStatement updateStatement = conn.prepareStatement(UPDATE_CHOICE_OF_USER);
+                updateStatement.setBoolean(1, status);
+                updateStatement.setInt(2, userId);
+                updateStatement.setInt(3, likedUserId);
+                updateStatement.executeUpdate();
+            } else {
+                PreparedStatement insertStatement = conn.prepareStatement(INSERT_CHOICE_OF_USER);
+                insertStatement.setInt(1, userId);
+                insertStatement.setInt(2, likedUserId);
+                insertStatement.setBoolean(3, status);
+                insertStatement.executeUpdate();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 }
