@@ -86,6 +86,8 @@ public class App {
         handler.addServlet(new ServletHolder(loginServlet), "/login/*");
         handler.addServlet(new ServletHolder(logoutServlet), "/logout/*");
 
+        handler.addServlet(RedirectServlet.class, "/*");
+
         server.setHandler(handler);
         server.start();
         server.join();
