@@ -16,7 +16,6 @@ import org.tinder.services.LikeDislikeUserService;
 import org.tinder.services.UserService;
 import org.tinder.services.LikedService;
 import org.tinder.services.MessageService;
-import org.tinder.services.FreemarkerService;
 
 import org.tinder.servlets.*;
 
@@ -50,14 +49,15 @@ public class App {
         UserService userService = new UserService(collectionUserDAO);
         UserController userController = new UserController(userService);
 
-        CollectionLikeDislikeUserDAO collectionLikeDislikeUserDAO = new CollectionLikeDislikeUserDAO(conn);
+        FreemarkerService freemarker = new FreemarkerService(DIR_TEMPLATES_NAME);
+
+        CollectionLikeDislikeUserDAO collectionLikeDislikeUserDAO = new CollectionLikeDislikeUserDAO(conn, freemarker);
         LikeDislikeUserService likeDislikeUserService = new LikeDislikeUserService(collectionLikeDislikeUserDAO);
 
 
         ServletContextHandler handler = new ServletContextHandler();
 
-        UsersServlet usersServlet = new UsersServlet(DIR_TEMPLATES_NAME, likeDislikeUserService);
-        FreemarkerService freemarker = new FreemarkerService(DIR_TEMPLATES_NAME);
+        UsersServlet usersServlet = new UsersServlet(likeDislikeUserService);
 
         LoginServlet loginServlet = new LoginServlet(freemarker, userController);
         LogoutServlet logoutServlet = new LogoutServlet(freemarker);
