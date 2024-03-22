@@ -12,13 +12,13 @@ import java.util.*;
 
 
 public class UsersServlet extends HttpServlet {
-    private final String fileName;
+//    private final String fileName;
     private LikeDislikeUserService likeDislikeUserService;
 
     public static ArrayList<User> users = new ArrayList<>();
 
-    public UsersServlet(String fileName, LikeDislikeUserService likeDislikeUserService) {
-        this.fileName = fileName;
+    public UsersServlet(LikeDislikeUserService likeDislikeUserService) {
+//        this.fileName = fileName;
         this.likeDislikeUserService = likeDislikeUserService;
     }
 

@@ -40,7 +40,7 @@ public class CollectionMessageDAO {
         currentUserIdOpt = Auth.getCookieValue(req);
         int currentUserId = currentUserIdOpt.map(Integer::parseInt).orElse(0);
 
-        Integer chatUserId = Integer.valueOf(getChatUserId(req));
+        int chatUserId = Integer.valueOf(getChatUserId(req));
 
         try {
             statement = conn.prepareStatement(GET_ALL_USERS_MESSAGES_QUERY);

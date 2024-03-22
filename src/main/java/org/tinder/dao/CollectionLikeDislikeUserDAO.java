@@ -6,6 +6,7 @@ import freemarker.template.TemplateException;
 import org.tinder.Auth;
 import org.tinder.Database;
 import org.tinder.ResourceOps;
+import org.tinder.services.FreemarkerService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,9 +32,11 @@ public class CollectionLikeDislikeUserDAO implements LikeDislikeUserDAO {
     private final ArrayList<String> lastNames = new ArrayList<>();
     private final ArrayList<Integer> ids = new ArrayList<>();
     private static int currentIndex = 0;
+    private final FreemarkerService freemarker;
 
-    public CollectionLikeDislikeUserDAO(Connection conn) {
+    public CollectionLikeDislikeUserDAO(Connection conn, FreemarkerService freemarker) {
         this.conn = conn;
+        this.freemarker = freemarker;
     }
 
     @Override
@@ -93,19 +96,14 @@ public class CollectionLikeDislikeUserDAO implements LikeDislikeUserDAO {
         String currentFirstName = firstNames.get(currentIndex);
         String currentLastName = lastNames.get(currentIndex);
 
-        HashMap<String, String> data = new HashMap<>();
+        HashMap<String, Object> data = new HashMap<>();
         data.put("name", currentFirstName);
         data.put("surname", currentLastName);
         data.put("image", currentImage);
 
-        Configuration cfg = new Configuration(Configuration.VERSION_2_3_32);
-        cfg.setDirectoryForTemplateLoading(new File(ResourceOps.resourceUnsafe("templates")));
 
-        try (PrintWriter pw = resp.getWriter()) {
-            Template template = cfg.getTemplate("like-page.ftl");
-            template.process(data, pw);
-        } catch (TemplateException e) {
-            throw new RuntimeException(e);
+        try (PrintWriter w = resp.getWriter()) {
+            freemarker.render("like-page.ftl", data, w);
         }
     }
 
