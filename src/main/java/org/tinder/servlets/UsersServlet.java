@@ -12,13 +12,13 @@ import java.util.*;
 
 
 public class UsersServlet extends HttpServlet {
-    private final String fileName;
+//    private final String fileName;
     private LikeDislikeUserService likeDislikeUserService;
 
     public static ArrayList<User> users = new ArrayList<>();
 
-    public UsersServlet(String fileName, LikeDislikeUserService likeDislikeUserService) {
-        this.fileName = fileName;
+    public UsersServlet(LikeDislikeUserService likeDislikeUserService) {
+//        this.fileName = fileName;
         this.likeDislikeUserService = likeDislikeUserService;
 
         User user1 = new User(0, "John", "Doe", "https://img.freepik.com/free-photo/inside-portrait-of-confident-young-man-in-white-clothes-posing-with-charming-smile-over-isolated-wall_291650-95.jpg?w=740&t=st=1710269612~exp=1710270212~hmac=21ec49050565c93e301030c28f4daed2d5b08e0c86153223d01ecf85923025b1", "1", "1", "Sales manager", new Date(2020, 01, 01));
