@@ -1,16 +1,10 @@
 package org.tinder.dao;
 
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import org.tinder.Auth;
-import org.tinder.Database;
-import org.tinder.ResourceOps;
 import org.tinder.services.FreemarkerService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -42,8 +36,7 @@ public class CollectionLikeDislikeUserDAO implements LikeDislikeUserDAO {
     @Override
     public void getInfoAboutUserToLikeDislike(HttpServletRequest req, HttpServletResponse resp){
         try {
-            String select = GET_ALL_INFO_USERS_TO_LIKE_DISLIKE;
-            PreparedStatement st = conn.prepareStatement(select);
+            PreparedStatement st = conn.prepareStatement(GET_ALL_INFO_USERS_TO_LIKE_DISLIKE);
             ResultSet rs = st.executeQuery();
 
             Optional<String> loggedInUserIdOpt = Auth.getCookieValue(req);

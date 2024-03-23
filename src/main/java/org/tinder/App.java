@@ -29,9 +29,8 @@ import java.util.EnumSet;
 public class App {
     private static final String DIR_TEMPLATES_NAME = "templates";
     public static void main(String[] args) throws Exception {
-        String portString = System.getenv("PORT");
+        String portString = System.getenv("PORT") != null ? System.getenv("PORT") : "8080";
         Integer port = Integer.parseInt(portString);
-
 
         Server server = new Server(port);
         Connection conn = null;

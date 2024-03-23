@@ -1,16 +1,11 @@
 package org.tinder.servlets;
 
-import org.tinder.ResourceOps;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
 
 public class ImgServlet extends HttpServlet {
     private final String root;
@@ -21,16 +16,17 @@ public class ImgServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String rqName = "/templates" + req.getRequestURI();
+        ClassLoader classLoader = this.getClass().getClassLoader();
 
-        String prefix = ResourceOps.resourceUnsafe(root);
-        String fileName = req.getPathInfo();
-        String fullName = prefix + fileName;
+        try (ServletOutputStream os = resp.getOutputStream();
+             InputStream grs = classLoader.getResourceAsStream(rqName.substring(1))) {
 
-        if (!new File(fullName).exists()) {
+            byte[] bytes = grs.readAllBytes();
+
+            os.write(bytes);
+        } catch (NullPointerException | IOException ex) {
             resp.setStatus(404);
-        } else try (ServletOutputStream os = resp.getOutputStream()) {
-            Path path = Paths.get(fullName);
-            Files.copy(path, os);
         }
     }
 }
